@@ -4,9 +4,9 @@ import Col from "../components/Col";
 import Row from "../components/Row";
 
 import { doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore'
-import db from '../db.js'
+import db from '../db'
 
-function Note () {
+function Note() {
   const params = useParams()
   const navigate = useNavigate()
   const [note, setNote] = useState({
@@ -14,21 +14,21 @@ function Note () {
     text: ''
   })
 
-  function changeHandler (e) {
+  function changeHandler(e) {
     setNote({
       ...note,
       [e.target.name]: e.target.value
     })
   }
 
-  function submitHandler (e) {
+  function submitHandler(e) {
     e.preventDefault()
 
     updateDoc(doc(db, 'notes', params.id), note)
       .then(() => navigate('/'))
   }
 
-  function clickHandler () {
+  function clickHandler() {
     deleteDoc(doc(db, 'notes', params.id))
       .then(() => navigate('/'))
   }
@@ -54,7 +54,7 @@ function Note () {
           <div class="mb-3">
             <label class="form-label">Title</label>
             <input name="title" type="text" class="form-control"
-              value={note.title} onChange={changeHandler}  />
+              value={note.title} onChange={changeHandler} />
           </div>
           <div class="mb-3">
             <label class="form-label">Text</label>
