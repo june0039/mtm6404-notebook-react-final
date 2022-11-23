@@ -1,26 +1,49 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Col from "../components/Col";
 import Row from "../components/Row";
 
+import { doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore'
+import db from '../db.js'
+
 function Note () {
   const params = useParams()
+  const navigate = useNavigate()
   const [note, setNote] = useState({
     title: '',
     text: ''
   })
 
   function changeHandler (e) {
-
+    setNote({
+      ...note,
+      [e.target.name]: e.target.value
+    })
   }
 
   function submitHandler (e) {
     e.preventDefault()
+
+    updateDoc(doc(db, 'notes', params.id), note)
+      .then(() => navigate('/'))
   }
 
   function clickHandler () {
-
+    deleteDoc(doc(db, 'notes', params.id))
+      .then(() => navigate('/'))
   }
+
+  useEffect(() => {
+    getDoc(doc(db, 'notes', params.id))
+      .then((document) => {
+        if (document.exists()) {
+          setNote({
+            title: document.data().title,
+            text: document.data().text
+          })
+        }
+      })
+  }, [])
 
   return (
     <Row>

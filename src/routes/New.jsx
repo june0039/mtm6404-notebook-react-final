@@ -1,20 +1,30 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Col from "../components/Col";
 import Row from "../components/Row";
 
+import { collection, addDoc } from 'firebase/firestore'
+import db from '../db'
+
 function New () {
+  const navigate = useNavigate()
   const [note, setNote] = useState({
     title: '',
     text: ''
   })
 
   function changeHandler (e) {
-
+    setNote({
+      ...note,
+      [e.target.name]: e.target.value
+    })
   }
 
   function submitHandler (e) {
     e.preventDefault()
+
+    const c = collection(db, 'notes')
+    addDoc(c, note).then(document => navigate('/note/' + document.id))
   }
 
   return (
