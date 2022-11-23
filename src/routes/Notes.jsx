@@ -5,9 +5,9 @@ import Col from "../components/Col";
 import Row from "../components/Row";
 
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
-import db from '../db.js'
+import db from '../db'
 
-function Notes () {
+function Notes() {
   const [notes, setNotes] = useState([])
 
   useEffect(() => {
