@@ -24,9 +24,11 @@ function New() {
 
   function submitHandler(e) {
     e.preventDefault()
+    //addDoc returns promise
 
     const c = collection(db, 'notes')
-    addDoc(c, note).then(document => navigate('/note/' + document.id))
+    addDoc(c, note)
+      .then(document => navigate('/note/' + document.id))
   }
 
   return (
