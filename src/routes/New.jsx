@@ -35,20 +35,20 @@ function New() {
         <form className="p-5 bg-light border border-1 mb-3"
           onSubmit={submitHandler}>
           <h2 className="mb-3">New Note</h2>
-          <div class="mb-3">
+          <div className="mb-3">
             <label className="form-label">Title</label>
-            <input name="title" type="text" class="form-control"
+            <input className="title" type="text" class="form-control"
               value={note.title} onChange={changeHandler} />
           </div>
           <div className="mb-3">
             <label className="form-label">Text</label>
-            <textarea className="text" class="form-control"
+            <textarea className="text" alt="form-control"
               value={note.text} onChange={changeHandler}></textarea>
           </div>
           <div className="d-flex justify-content-end">
 
             <Link className="btn btn-secondary me-3" to="/">Cancel</Link>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" className="btn btn-primary">Save</button>
           </div>
         </form>
       </Col>
