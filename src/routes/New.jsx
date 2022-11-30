@@ -6,21 +6,23 @@ import Row from "../components/Row";
 import { collection, addDoc } from 'firebase/firestore'
 import db from '../db'
 
-function New () {
+function New() {
   const navigate = useNavigate()
   const [note, setNote] = useState({
     title: '',
     text: ''
   })
 
-  function changeHandler (e) {
+  function changeHandler(e) {
+    //console.log (e.target.name , e.target.value)
     setNote({
       ...note,
       [e.target.name]: e.target.value
+
     })
   }
 
-  function submitHandler (e) {
+  function submitHandler(e) {
     e.preventDefault()
 
     const c = collection(db, 'notes')
@@ -30,21 +32,22 @@ function New () {
   return (
     <Row>
       <Col>
-        <form class="p-5 bg-light border border-1 mb-3"
+        <form className="p-5 bg-light border border-1 mb-3"
           onSubmit={submitHandler}>
-          <h2 class="mb-3">New Note</h2>
+          <h2 className="mb-3">New Note</h2>
           <div class="mb-3">
-            <label class="form-label">Title</label>
+            <label className="form-label">Title</label>
             <input name="title" type="text" class="form-control"
-              value={note.title} onChange={changeHandler}  />
+              value={note.title} onChange={changeHandler} />
           </div>
-          <div class="mb-3">
-            <label class="form-label">Text</label>
-            <textarea name="text" class="form-control"
+          <div className="mb-3">
+            <label className="form-label">Text</label>
+            <textarea className="text" class="form-control"
               value={note.text} onChange={changeHandler}></textarea>
           </div>
-          <div class="d-flex justify-content-end">
-            <Link class="btn btn-secondary me-3" to="/">Cancel</Link>
+          <div className="d-flex justify-content-end">
+
+            <Link className="btn btn-secondary me-3" to="/">Cancel</Link>
             <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </form>
